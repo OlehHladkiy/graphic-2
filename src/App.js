@@ -10,9 +10,7 @@ const canvas = {
 }
 let dotsArrayTemp = [];
 let dotsArrayToTransform = [];
-let showDots = false;
 const gridSize = 50;
-const radius = 5;
 
 function App() {
   const [ctx, setCtx] = useState(null);
@@ -55,21 +53,6 @@ function App() {
 
       temp = { x, y };
   }
-
-  /// if regime ShowDots on,draw auxiliary lines
-  if (showDots) {
-      temp = arr[0];
-      for (let i = 0; i < arr.length; i++) {
-          const { x, y } = arr[i];
-          ctx.beginPath();
-          drawLine(temp.x, temp.y, x, y);
-          ctx.stroke();
-          ctx.lineWidth = 1;
-          ctx.closePath();
-          temp = { x, y };
-          drawArc({ x, y });
-      }
-  }
 };
 
 
@@ -80,16 +63,6 @@ const drawLine = (x1, y1, x2, y2) => {
     ctx.closePath();
 
     ctx.stroke();
-};
-
-const drawArc = ({ x, y }) => {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = "green";
-    ctx.fill();
-    ctx.strokeStyle = "#003300";
-    ctx.stroke();
-    ctx.closePath();
 };
 
 const drawGrid = (w = canvas.width, h = canvas.height, step = gridSize) => {
